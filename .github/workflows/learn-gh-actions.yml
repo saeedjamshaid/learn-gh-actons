@@ -23,12 +23,12 @@ jobs:
         run: mkdir ./packedNuget
       
       - name: create nuget package
-        run: dotnet pack -p:PackageVersion=3.0.0.${{ github.run_number }} ./SimpleConsoleApp/SimpleConsoleApp.csproj -o ../packedNuget -c Release
+        run: dotnet pack -p:PackageVersion=3.0.0.${{ github.run_number }} ./SimpleConsoleApp/SimpleConsoleApp.csproj -o ./packedNuget -c Release
         
       - name: upload package
         uses: actions/upload-artifact@v3
         with:
           name: Nuget Package
-          path: ./packedNuget/SimpleConsoleApp.3.0.0.${{ github.run_number }}-rc.nupkg
+          path: ./packedNuget/SimpleConsoleApp.3.0.0.${{ github.run_number }}.nupkg
           retention-days: 1
       
