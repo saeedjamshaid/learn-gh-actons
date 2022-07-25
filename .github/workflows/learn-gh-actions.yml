@@ -17,7 +17,7 @@ jobs:
         run: dotnet test ./SimpleTest/SimpleTest.csproj -c Release
         
       - name: Remove Packed Nuget Dir
-        run: if exist ./packedNuget/ del /Q/S ./packedNuget & rmdir ./packedNuget
+        run: if [ -d ./packedNuget/ ]; then rm -rf ./packedNuget
       
       - name: Remove Packed Nuget Dir
         run: mkdir ./packedNuget
