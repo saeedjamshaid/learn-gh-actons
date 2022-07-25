@@ -16,12 +16,19 @@ jobs:
       - name: run tests    
         run: dotnet test ./SimpleTest/SimpleTest.csproj -c Release
         
-      - name: Remove Packed Nuget Dir
+      - name: remove packed nuget dir
         run: if [ -d ./packedNuget/ ]; then rm -rf ./packedNuget; fi
       
-      - name: Remove Packed Nuget Dir
+      - name: create packed nuget dir
         run: mkdir ./packedNuget
       
-      - name: Create Nuget Package
+      - name: create nuget package
         run: dotnet pack -p:PackageVersion=3.0.0.${{ github.run_number }} ./SimpleConsoleApp/SimpleConsoleApp.csproj -o ../packedNuget -c Release
+        
+      - name: upload package
+        uses: actions/upload-artifact@v3
+        with:
+          name: Nuget Package
+          path: ./packedNuget/SimpleConsoleApp.3.0.0.${{ github.run_number }}-rc.nupkg
+          retention-days: 1
       
