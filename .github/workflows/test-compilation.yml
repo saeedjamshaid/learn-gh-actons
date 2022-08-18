@@ -41,7 +41,7 @@ jobs:
         run: dotnet build
       
       - name: success message
-        if: ${{ success() }}
+        if: ${{ success() }}                  #runs if all previous steps have executed successfully
         run: echo 'compiled successfully'
         #uses: rtCamp/action-slack-notify@v2
         #env:
@@ -53,7 +53,7 @@ jobs:
           #SLACK_USERNAME: CommonsGitHubBot
           #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}          
         
-      - name: failure message
+      - name: failure message                 #runs if any of the previous step fails to execute successfully
         if: ${{ failure() }}
         run: echo 'failed to compile'
         
