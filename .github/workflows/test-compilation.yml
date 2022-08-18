@@ -42,7 +42,7 @@ jobs:
       
       - name: success message
         if: ${{ success() }}
-        #run: echo 'compiled successfully'
+        run: echo 'compiled successfully'
         #uses: rtCamp/action-slack-notify@v2
         #env:
           #SLACK_CHANNEL: codegen-test-runner
