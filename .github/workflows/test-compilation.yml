@@ -1,0 +1,60 @@
+name: test-compilation
+on:
+  #workflow_dispatch    #manual trigger
+  push:
+    branches:
+      - main
+      #- 'v3-*'
+      #- '!v3-staging'
+      
+    #Or we can use branches-ignore instead of branches. Only one can be used for the same event filter
+    #branches-ignore
+      #- v3-master
+      #- v3-staging
+    
+    #We can also use paths or paths-ignore filter with wildcards e.g.
+    #paths:
+      #- '**.cs'          #Workflow will run when only a change in js file pushed
+      
+    #Or we can also use paths-ignore which can't be used at the same time with paths
+    #paths-ignore
+      #- 'APIMatic.CodeGen/**.Test'     #ignore run when changes only occur in test projects. All paths have to match with pattern for workflow to not run
+      
+    #Multiple filters can be used e.g. branches and paths-ignore at the same time and there is an AND relation between them
+    
+  #schedule:
+    #-cron: '30 5 * * 1,3'
+    
+jobs:
+  build-project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print build number
+        run: echo ${{ github.run_number }}    #environment variable
+        
+      - name: checkout repo
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          
+      - name: build solution
+        run: dotnet build
+      
+      - name: success message
+        if: ${{ success() }}
+        #run: echo 'compiled successfully'
+        #uses: rtCamp/action-slack-notify@v2
+        #env:
+          #SLACK_CHANNEL: codegen-test-runner
+          #SLACK_COLOR: ${{ job.status }}
+          #SLACK_ICON: https://img.pngio.com/robot-icon-of-flat-style-available-in-svg-png-eps-ai-icon-robot-icon-png-256_256.png
+          #SLACK_MESSAGE: 'Workflow successfully completed!'
+          #SLACK_TITLE: Success
+          #SLACK_USERNAME: CommonsGitHubBot
+          #SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}          
+        
+      - name: failure message
+        if: ${{ failure() }}
+        run: echo 'failed to compile'
+        
+    
