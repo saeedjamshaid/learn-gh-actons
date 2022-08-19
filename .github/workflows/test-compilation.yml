@@ -1,6 +1,6 @@
 name: test-compilation
 on:
-  #workflow_dispatch:    #manual trigger
+  workflow_dispatch:    #manual trigger
   push:
     branches:
       - main
