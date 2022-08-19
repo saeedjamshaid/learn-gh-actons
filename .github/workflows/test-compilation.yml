@@ -14,7 +14,7 @@ on:
     
     #We can also use paths or paths-ignore filter with wildcards e.g.
     #paths:
-      #- '**.cs'          #Workflow will run when only a change in js file pushed
+      #- '**.cs'          #Workflow will run when only a change in .cs files are pushed
       
     #Or we can also use paths-ignore which can't be used at the same time with paths
     #paths-ignore
