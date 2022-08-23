@@ -13,8 +13,8 @@ on:
       #- v3-staging
     
     #We can also use paths or paths-ignore filter with wildcards e.g.
-    #paths:
-      #- '**.cs'          #Workflow will run when only a change in .cs files are pushed
+    paths:
+      - '**.cs'          #Workflow will run when only a change in .cs files are pushed
       
     #Or we can also use paths-ignore which can't be used at the same time with paths
     #paths-ignore
@@ -27,11 +27,11 @@ on:
     
 jobs:
   build-project:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-    #runs-on: ubuntu-latest
+    #runs-on: ${{ matrix.os }}
+    #strategy:
+      #matrix:
+        #os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ubuntu-latest
     steps:
       - name: print build number
         run: echo ${{ github.run_number }}    #environment variable
