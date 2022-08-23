@@ -6,7 +6,7 @@ namespace SimpleConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"Sum: {MathFunc.Sum(1, 2)}");
+            Console.WriteLine($"Sum is: {MathFunc.Sum(1, 2)}");
         } 
     }
 
