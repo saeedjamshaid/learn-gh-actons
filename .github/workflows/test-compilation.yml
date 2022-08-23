@@ -27,7 +27,11 @@ on:
     
 jobs:
   build-project:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    #runs-on: ubuntu-latest
     steps:
       - name: print build number
         run: echo ${{ github.run_number }}    #environment variable
