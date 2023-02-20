@@ -3,6 +3,8 @@ on:
   push:
     branches: ['test']
     
-jobs:
+jobs:  
   echo-string:
-    run: echo ${{ format('{0}{1}', ${{ github.ref_name }}, '-code-samples') }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ format('{0}{1}', ${{ github.ref_name }}, '-code-samples') }}
